@@ -1,0 +1,16 @@
+{
+  "name": "Детокс-дневник",
+  "short_name": "Детокс",
+  "description": "Детокс-дневник — схема приёма, вода, тарелка и самочувствие на два месяца детокса",
+  "lang": "ru",
+  "start_url": "./#today",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F1F5F1",
+  "theme_color": "#2F7D4F",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
