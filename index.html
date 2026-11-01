@@ -981,7 +981,7 @@ function renderProfile(){
       <form class="fgrid" id="pf" onsubmit="return false">
         <label>Имя<input id="pf-name" value="${esc(pr.name)}" maxlength="30" autocomplete="given-name"></label>
         <label>Пол<select id="pf-sex"><option value="f" ${pr.sex === 'f' ? 'selected' : ''}>Женский</option><option value="m" ${pr.sex === 'm' ? 'selected' : ''}>Мужской</option></select></label>
-        <label>Дата старта<input id="pf-start" type="date" value="${esc(pr.start || '')}"></label>
+        <label>Дата старта детокса<input id="pf-start" type="date" value="${esc(pr.start || '')}"></label>
         <label>Вода в день<select id="pf-water">${[2000,2500,3000].map(v => `<option value="${v}" ${waterGoal() === v ? 'selected' : ''}>${fmtN(v/1000)} л</option>`).join('')}</select></label>
       </form>
       <p class="fine">По схеме марафона — 2,5–3 л жидкости в день. Если врач рекомендовал ограничить воду, следуйте его совету.</p>
@@ -1032,9 +1032,9 @@ function renderSetup(){
     <form class="fgrid" id="setup-form">
       <label>Как вас зовут<input id="su-name" value="${esc(S.profile.name)}" maxlength="30" autocomplete="given-name" required></label>
       <label>Пол<select id="su-sex"><option value="f" ${S.profile.sex !== 'm' ? 'selected' : ''}>Женский</option><option value="m" ${S.profile.sex === 'm' ? 'selected' : ''}>Мужской</option></select></label>
-      <label>Дата старта<input id="su-start" type="date" value="${esc(S.profile.start || tm)}" min="${dkey(addDays(new Date(), -60))}"></label>
+      <label>Дата старта детокса (не дата рождения)<input id="su-start" type="date" value="${esc(S.profile.start || tm)}" min="${dkey(addDays(new Date(), -60))}" max="${dkey(addDays(new Date(), 90))}"></label>
     </form>
-    <p class="small muted">Старт — день, когда вы начнёте схему приёма. Сегодня — ${esc(fmtDay(t))}. Капсулы лучше начать, когда продукты уже дома.</p>
+    <p class="small muted">Дата старта — день, когда вы начнёте схему приёма, а не дата рождения. Сегодня — ${esc(fmtDay(t))}. Капсулы лучше начать, когда продукты уже дома.</p>
     <div class="card" style="box-shadow:none;background:var(--bg)"><h2>Важно перед стартом</h2><ul class="notes">${RULES.map(r => `<li><span class="small">${esc(r)}</span></li>`).join('')}</ul></div>
     <label class="agree"><input type="checkbox" id="su-ok"> <span>Я ${sx('прочитал','прочитала')} и при необходимости посоветуюсь с врачом</span></label>
     <button class="btn wide" data-act="setup-save">Дальше</button>`;
