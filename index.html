@@ -71,6 +71,7 @@ p{margin:0}
 .num{font-family:var(--f-display);font-variant-numeric:tabular-nums;font-weight:500}
 .tnum{font-variant-numeric:tabular-nums}
 .fine{font-size:12.5px;color:var(--muted);line-height:1.5}
+.fine a,.small a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 
 .card{background:var(--surface);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);display:grid;gap:12px;min-width:0}
 .row{display:flex;align-items:center;gap:10px;min-width:0}
@@ -309,6 +310,11 @@ details > div{display:grid;gap:8px;margin-top:8px}
 
 /* Автор: по Стандартам NL (п. 6.2.2) ресурс партнёра подписывается его именем */
 const AUTHOR = 'Дмитрий и Екатерина Мёдовы, бизнес-партнёры NL';
+/* Telegram-чат «идеи и помощь» (общий с «Тонусом»): туда же сообщают, если кто-то продаёт приложение. Пока пусто — кнопки чата не показываются */
+const SUPPORT_URL = 'https://t.me/+qLj2Dv82yAU2MjJk';
+const supportA = (label, cls = '') => SUPPORT_URL ? `<a ${cls ? `class="${cls}" ` : ''}href="${esc(SUPPORT_URL)}" target="_blank" rel="noopener">${label}</a>` : '';
+/* Приложение бесплатное: так человек поймёт, что его обманули, если с него взяли деньги */
+const freeNote = () => `«Детокс-дневник» бесплатный, продавать его нельзя.${SUPPORT_URL ? ` Если с вас взяли за него деньги, ${supportA('напишите нам')}.` : ''}`;
 const PRODUCTS = window.NL_PRODUCTS || [];
 const NL_META = window.NL_META || {};
 
@@ -662,13 +668,14 @@ function renderToday(){
     ${demoBanner()}
     <header class="vh"><div><div class="eyebrow">${esc(wd)}</div><h1>${hi}${S.profile.name ? ', ' + esc(S.profile.name) : ''}</h1></div></header>
     ${body}
-    <p class="fine">«Детокс-дневник» — автор: ${esc(AUTHOR)}. Не является официальным приложением NL International. Записи хранятся только на этом телефоне.</p>`;
+    <p class="fine">«Детокс-дневник» — автор: ${esc(AUTHOR)}. Не является официальным приложением NL International. Записи хранятся только на этом телефоне. ${freeNote()}</p>`;
 }
 function welcomeCard(){
   return `<div class="card">
     <h2>Добро пожаловать в «Детокс-дневник»</h2>
     <p class="muted">Два месяца бережного детокса по шагам: кишечник, печень, почки и микробиом. Каждый день приложение подскажет схему приёма, поможет пить достаточно воды, собирать правильную тарелку и следить за самочувствием.</p>
     <button class="btn" data-act="setup">Начать</button>
+    <p class="fine">${freeNote()}</p>
   </div>`;
 }
 function prepCard(n){
@@ -999,6 +1006,13 @@ function renderProfile(){
       <p class="fine">После установки приложение открывается с экрана телефона и работает без интернета.</p>
     </div>
 
+    ${SUPPORT_URL ? `<div class="card">
+      <h2>Идеи и помощь</h2>
+      <p class="small muted">Есть идея, что-то не работает или вам продали это приложение? Напишите нам в чат, мы читаем всё.</p>
+      <p class="fine">Это общая группа в Telegram: сообщения и список участников видят все, кто в ней состоит. Не пишите туда личное о здоровье.</p>
+      ${supportA('Написать в чат', 'btn line sm')}
+    </div>` : ''}
+
     <div class="card">
       <h2>Данные</h2>
       <p class="small muted">Все записи хранятся только на этом телефоне. Никуда не отправляются.</p>
@@ -1007,7 +1021,7 @@ function renderProfile(){
         <button class="btn ${confirmAct === 'wipe' ? 'danger' : 'line'} sm" data-act="wipe">${confirmAct === 'wipe' ? 'Удалить всё? Нажмите ещё раз' : 'Удалить все записи'}</button>
       </div>
     </div>
-    <p class="fine">«Детокс-дневник» — автор: ${esc(AUTHOR)}. Не является официальным приложением NL International. Программа не заменяет консультацию врача.</p>`;
+    <p class="fine">«Детокс-дневник» — автор: ${esc(AUTHOR)}. Не является официальным приложением NL International. Программа не заменяет консультацию врача. ${freeNote()}</p>`;
 }
 
 /* ================= ОКНА ================= */
