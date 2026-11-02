@@ -1086,8 +1086,7 @@ function renderProduct(){
     ${uses.length ? `<div class="infobox"><b>В схеме марафона</b>${uses.slice(0, 3).map(u => `<p class="small">${esc(u)}</p>`).join('')}</div>` : ''}
     <div class="infobox">
       <b>Состав, способ применения и противопоказания</b>
-      <p class="small muted">Смотрите на упаковке продукта или на его официальной странице на сайте NL International.</p>
-      <a class="btn line sm" href="${esc(p.url)}" target="_blank" rel="noopener">Открыть страницу продукта ↗</a>
+      <p class="small muted">Смотрите на упаковке продукта.</p>
     </div>
     <p class="fine">Название — по данным NL International${when}. ${p.bad ? 'БАД, не является лекарственным средством. ' : ''}Перед применением прочитайте информацию на упаковке.</p>`;
 }
